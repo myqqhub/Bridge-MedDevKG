@@ -1,4 +1,3 @@
-# Anonymous
 # Bridge-MedDevKG: A Hybrid Knowledge Graph Framework for Medical Device-Patent Linking
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
