@@ -1,6 +1,4 @@
-以下是 ACL 2026 camera-ready 版本 README 中 Citation 部分 的正确、规范格式（已根据你提供的 \author{} 信息整理）：
-推荐直接使用的版本（放在 README 最开头，替换你原来的介绍部分）：
-Markdown# Bridge-MedDevKG: A Hybrid Knowledge Graph Framework for Medical Device-Patent Linking
+# Bridge-MedDevKG: A Hybrid Knowledge Graph Framework for Medical Device-Patent Linking
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/)
