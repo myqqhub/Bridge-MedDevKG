@@ -6,6 +6,9 @@
 
 **Bridge-MedDevKG** is a coarse-to-fine framework for cross-domain entity linking between FDA-approved medical devices and USPTO patents. It constructs a high-fidelity Knowledge Graph by fusing domain-adaptive ontology, multi-signal candidate generation, and learned reranking to bridge the severe semantic gap between regulatory and technical documents.
 
+This repository contains the **code**, **released datasets**, and **pre-computed results** for the paper:
+> **From Regulatory Approvals to Patents: Cross-Domain Linking for Cardiovascular Device Traceability**
+
 **If you use this repository (code, data, or results) in your work, please cite our paper:**
 
 ```bibtex
@@ -19,14 +22,11 @@
   publisher = {Association for Computational Linguistics},
   note = {To appear}
 }
-Corresponding authors:
-Haijiang Liu (bill1103478225@outlook.com) and Moyan Li (moyanli@hkust-gz.edu.cn)
-Note: The official Anthology URL and DOI will be available after the conference (July 2026). You may search for the paper title on https://aclanthology.org/ later.
+```
 
-**Bridge-MedDevKG** is a coarse-to-fine framework for cross-domain entity linking between FDA-approved medical devices and USPTO patents. It constructs a high-fidelity Knowledge Graph by fusing domain-adaptive ontology, multi-signal candidate generation, and learned reranking to bridge the severe semantic gap between regulatory and technical documents.
-
-This repository contains the **code**, **released datasets**, and **pre-computed results** for the paper:
-> **From Regulatory Approvals to Patents: Cross-Domain Linking for Cardiovascular Device Traceability**
+> **Corresponding authors:** Haijiang Liu (bill1103478225@outlook.com) and Moyan Li (moyanli@hkust-gz.edu.cn)
+>
+> **Note:** The official Anthology URL and DOI will be available after the conference (July 2026). You may search for the paper title on https://aclanthology.org/ later.
 
 **Datasets disclosed in `data/`:** (1) **Gold standard** — 585 expert-verified device–patent pairs (`gold_standard.parquet`). (2) **Evaluation / baseline data** — 434 FDA PMA documents (`baseline_fda_docs.parquet`), 50K patent subset (`baseline_patents.parquet`), gold links for retrieval baselines (`baseline_gold_links.parquet`), 2,672 samples for cross-encoder comparison (`evaluation_dataset.csv`), gold relation IDs (`gold_rel_ids.csv`), and a 500-row sample of Stage 2 candidates (`sample_links_to_process.parquet`). (3) **Reranker training data** — `training_data_5a.parquet`, the labeled dataset used to train the XGBoost reranker in Step 5a. The KG in this work is the set of device–patent links (e.g. V4_WEIGHTED_LINK); the data in `data/` are exported from that graph (via `code/local_export_all.py`, which reads from an existing Neo4j instance). One large file — `links_to_process.parquet` (~4.4GB) — is generated from the full Neo4j KG and omitted due to size constraints. A representative sample (`sample_links_to_process.parquet`, 500 rows) is provided in `data/` for reference; with the full file, Steps 5a–5c in `hpc_run_all.py` train the reranker and produce the refined link set (the validated KG). With the disclosed datasets, Steps 6, 7, 8, 13, 14 reproduce all paper tables.
 
@@ -41,16 +41,6 @@ This repository contains the **code**, **released datasets**, and **pre-computed
 | Companies (normalized) | 29,758 |
 | **Gold-Standard Verified Pairs** | **585** |
 | Devices with Disclosures | 88 (20.3%) |
-
-
----
-
-## 🚀 Key Features
-
-* **MedDevOnto:** Domain-adaptive ontology injecting expert-guided weights into UMLS. Anchor terms (stent, catheter, valve, etc.) receive weight 1.0; generic terms receive 0.1–0.3. Improves recall by **+11.3%** over uniform UMLS weighting.
-* **Multi-Signal Candidate Generation:** Fuses company affiliation ($S_{company}$), SBERT vector similarity ($S_{vector}$), and ontology-weighted entity overlap ($S_{entity}$), achieving **98.97% gold recall** at candidate generation (579/585 pairs).
-* **Learned Noise Reduction:** BGE-M3 cross-encoder + XGBoost classification (9-dimensional features, 5-fold CV F1=0.931), achieving **50.9% incremental noise reduction**.
-* **Gold standard:** 585 expert-verified device–patent pairs from litigation filings, SEC filings, and virtual patent marking — the first such evaluation set for this task.
 
 ---
 
@@ -89,7 +79,7 @@ Stage 3: Learned Noise Reduction (Reranking)
 │   │                                    # NOTE: Requires local Neo4j instance
 │   ├── local_import_results.py          # Import HPC results → Neo4j
 │   │                                    # NOTE: Requires local Neo4j instance
-│   └──add_fewshot_examp.py             # Ran few-shot prompting
+│   └── add_fewshot_examp.py             # Ran few-shot prompting
 ├── data/
 │   ├── gold_standard.parquet           # 585 expert-verified device-patent pairs
 │   ├── gold_rel_ids.csv                # Gold relation IDs for Stage 3 monitoring
@@ -97,7 +87,7 @@ Stage 3: Learned Noise Reduction (Reranking)
 │   ├── baseline_fda_docs.parquet       # 434 FDA PMA documents (Step 7)
 │   ├── baseline_patents.parquet        # 50,000 patent subset (Step 7)
 │   ├── baseline_gold_links.parquet     # Gold links for baseline R@K evaluation
-│   ├── training_data_5a.parquet        # Labeled dataset for XGBoost reranker 
+│   ├── training_data_5a.parquet        # Labeled dataset for XGBoost reranker
 │   └── sample_links_to_process.parquet # 500-row sample of Stage 2 candidates
 ├── results/
 │   ├── baseline_results.csv            # Table 2 Group A: retrieval baseline results
@@ -145,9 +135,9 @@ python code/hpc_run_all.py 6
 python code/hpc_run_all.py 5a 5b 5c
 ```
 
->  **Note:** `links_to_process.parquet` (~4.4GB) is generated from the full Neo4j KG and 
-> omitted due to size constraints. A representative sample (`sample_links_to_process.parquet`, 
-> 500 rows) is provided in `data/` for reference. All paper tables can be fully reproduced 
+> **Note:** `links_to_process.parquet` (~4.4GB) is generated from the full Neo4j KG and
+> omitted due to size constraints. A representative sample (`sample_links_to_process.parquet`,
+> 500 rows) is provided in `data/` for reference. All paper tables can be fully reproduced
 > using the provided `data/` files by running Steps 6, 7, 8, 13, 14.
 
 ---
@@ -187,7 +177,6 @@ python code/hpc_run_all.py 5a 5b 5c
 | `vec_d` / `vec_p` | str | all-mpnet-base-v2 embeddings (comma-separated float) |
 | `ent_names_d` / `ent_names_p` | str | Extracted entities (\|\|\|-delimited) |
 
-
 ---
 
 ## ⚙️ Configuration
@@ -216,3 +205,22 @@ All prompts enforce: (1) in-context normalization rules, (2) Anti-Super-Node con
 | `reranker_comparison.csv` | Table 5 / Table 17 | ROC-AUC, PR-AUC, F1, latency for 13 cross-encoder models on 2,672 evaluation samples |
 | `table1_main_results.csv` | Table 3 | R@Gold with 95% CI for Stage-2 signal ablation (w/o Company/Vector/Entity/Rescue) |
 | `table2_ablation.csv` | Table 4 | R@Gold and noise reduction for fixed thresholds (θ=60/70/80/90) vs. Stage 3 learned fusion |
+
+---
+
+## Citation
+
+If you use this code, data, or results, please cite:
+
+```bibtex
+@inproceedings{yang-etal-2026-bridge-meddevkg,
+  title = {From Regulatory Approvals to Patents: Cross-Domain Linking for Cardiovascular Device Traceability},
+  author = {Qingqing Yang and Haijiang Liu and Moyan Li},
+  booktitle = {Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (ACL 2026)},
+  month = {July},
+  year = {2026},
+  address = {San Diego, California, USA},
+  publisher = {Association for Computational Linguistics},
+  note = {To appear}
+}
+```
