@@ -1,8 +1,29 @@
-# Bridge-MedDevKG: A Hybrid Knowledge Graph Framework for Medical Device-Patent Linking
+以下是 ACL 2026 camera-ready 版本 README 中 Citation 部分 的正确、规范格式（已根据你提供的 \author{} 信息整理）：
+推荐直接使用的版本（放在 README 最开头，替换你原来的介绍部分）：
+Markdown# Bridge-MedDevKG: A Hybrid Knowledge Graph Framework for Medical Device-Patent Linking
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/release/python-390/)
 [![Framework](https://img.shields.io/badge/Framework-PyTorch%20|%20XGBoost-orange)]()
+
+**Bridge-MedDevKG** is a coarse-to-fine framework for cross-domain entity linking between FDA-approved medical devices and USPTO patents. It constructs a high-fidelity Knowledge Graph by fusing domain-adaptive ontology, multi-signal candidate generation, and learned reranking to bridge the severe semantic gap between regulatory and technical documents.
+
+**If you use this repository (code, data, or results) in your work, please cite our paper:**
+
+```bibtex
+@inproceedings{yang-etal-2026-bridge-meddevkg,
+  title = {From Regulatory Approvals to Patents: Cross-Domain Linking for Cardiovascular Device Traceability},
+  author = {Qingqing Yang and Haijiang Liu and Moyan Li},
+  booktitle = {Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (ACL 2026)},
+  month = {July},
+  year = {2026},
+  address = {San Diego, California, USA},
+  publisher = {Association for Computational Linguistics},
+  note = {To appear}
+}
+Corresponding authors:
+Haijiang Liu (bill1103478225@outlook.com) and Moyan Li (moyanli@hkust-gz.edu.cn)
+Note: The official Anthology URL and DOI will be available after the conference (July 2026). You may search for the paper title on https://aclanthology.org/ later.
 
 **Bridge-MedDevKG** is a coarse-to-fine framework for cross-domain entity linking between FDA-approved medical devices and USPTO patents. It constructs a high-fidelity Knowledge Graph by fusing domain-adaptive ontology, multi-signal candidate generation, and learned reranking to bridge the severe semantic gap between regulatory and technical documents.
 
