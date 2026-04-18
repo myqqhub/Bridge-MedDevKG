@@ -24,7 +24,14 @@ This repository contains the **code**, **released datasets**, and **pre-computed
 }
 ```
 
-> **Corresponding authors:** Haijiang Liu (bill1103478225@outlook.com) and Moyan Li (moyanli@hkust-gz.edu.cn)
+> ## Authors
+
+- **Qingqing Yang** (qyang696@connect.hkust-gz.edu.cn)
+- **Haijiang Liu*** (bill1103478225@outlook.com)
+- **Moyan Li*** (moyanli@hkust-gz.edu.cn)
+
+\* Corresponding authors
+
 >
 > **Note:** The official Anthology URL and DOI will be available after the conference (July 2026). You may search for the paper title on https://aclanthology.org/ later.
 
